@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# A2 activation function: second-order (x * x)
+# A2 activation function: second-order ReLU (max(0, x^2))
 def A2(x):
-    return x * x
+    return np.maximum(0, x * x)
 
 # Hand-crafted neural multiplication module
 def multiplication_module(F1_vals, F2_vals):
@@ -23,8 +23,8 @@ def multiplication_module(F1_vals, F2_vals):
 
 # Define the input range
 x_vals = np.linspace(0, 2 * np.pi, 500)
-F1_vals = np.sin(x_vals)
-F2_vals = np.cos(x_vals)
+F1_vals = np.sin(x_vals) + 1
+F2_vals = np.cos(x_vals) + 1
 
 # Neural network approximation of the product
 nn_product_vals = multiplication_module(F1_vals, F2_vals)
@@ -37,13 +37,13 @@ plt.figure(figsize=(10, 8))
 
 # Plot F1
 plt.subplot(3, 1, 1)
-plt.plot(x_vals, F1_vals, label='$F_1(x) = \sin(x)$', color='blue')
+plt.plot(x_vals, F1_vals, label='$F_1(x) = \sin(x) + 1$', color='blue')
 plt.grid(True)
 plt.legend()
 
 # Plot F2
 plt.subplot(3, 1, 2)
-plt.plot(x_vals, F2_vals, label='$F_2(x) = \cos(x)$', color='green')
+plt.plot(x_vals, F2_vals, label='$F_2(x) = \cos(x) + 1$', color='green')
 plt.grid(True)
 plt.legend()
 
@@ -55,6 +55,6 @@ plt.grid(True)
 plt.legend()
 plt.xlabel('$x$')
 
-plt.suptitle('Neural Network Approximation of $F_1 \cdot F_2$ using $A_2(x) = x^2$')
+plt.suptitle('Neural Network Approximation of $F_1 \cdot F_2$ using $A_2(x) = \max(0, x^2)$')
 plt.tight_layout(rect=[0, 0, 1, 0.96])
 plt.show()
